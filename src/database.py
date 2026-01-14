@@ -4,7 +4,7 @@ Database module for managing LOT-specific liquor data using SQLite and SQLAlchem
 
 import os
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -45,7 +45,7 @@ class LOTData(Base):
     
     # Metadata
     production_date = Column(DateTime)
-    entry_date = Column(DateTime, default=datetime.utcnow)
+    entry_date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     notes = Column(Text)
     
     def __repr__(self):
@@ -68,7 +68,7 @@ class SensoryProfile(Base):
     
     # Taster information
     taster_name = Column(String(100))
-    tasting_date = Column(DateTime, default=datetime.utcnow)
+    tasting_date = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     # AI-generated content
     ai_flavor_report = Column(Text)

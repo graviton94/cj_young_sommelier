@@ -95,8 +95,17 @@ class SensoryPredictor:
         
         df = pd.DataFrame(data)
         
-        # Handle missing values
-        df = df.fillna(df.mean())
+        # Handle missing values with explicit strategy
+        # For chemical parameters, use median instead of mean to be more robust to outliers
+        # Zero is not appropriate for all parameters, so we use median of available data
+        for col in self.feature_names:
+            if col in df.columns and df[col].isnull().any():
+                # Use median for more robust imputation
+                median_val = df[col].median()
+                if pd.isna(median_val):
+                    # If all values are NaN, use reasonable default
+                    median_val = 0.0
+                df[col] = df[col].fillna(median_val)
         
         features = df[self.feature_names]
         targets = df[self.target_names] if all(t in df.columns for t in self.target_names) else None

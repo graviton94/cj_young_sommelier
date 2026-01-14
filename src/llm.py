@@ -29,7 +29,8 @@ class GeminiFlavorReporter:
             )
         
         genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-pro')
+        # Using gemini-1.5-flash for better performance and compatibility
+        self.model = genai.GenerativeModel('gemini-1.5-flash')
     
     def generate_flavor_report(
         self,
@@ -215,7 +216,7 @@ FINISH: descriptor1, descriptor2, descriptor3...
             response = self.model.generate_content(prompt)
             text = response.text
             
-            # Parse response into structured format
+            # Parse response into structured format with more robust parsing
             descriptors = {
                 'aroma': [],
                 'flavor': [],
@@ -223,16 +224,24 @@ FINISH: descriptor1, descriptor2, descriptor3...
                 'finish': []
             }
             
+            # Try to extract descriptors with more flexible parsing
+            import re
             for line in text.split('\n'):
                 line = line.strip()
-                if line.startswith('AROMA:'):
-                    descriptors['aroma'] = [d.strip() for d in line.replace('AROMA:', '').split(',')]
-                elif line.startswith('FLAVOR:'):
-                    descriptors['flavor'] = [d.strip() for d in line.replace('FLAVOR:', '').split(',')]
-                elif line.startswith('MOUTHFEEL:'):
-                    descriptors['mouthfeel'] = [d.strip() for d in line.replace('MOUTHFEEL:', '').split(',')]
-                elif line.startswith('FINISH:'):
-                    descriptors['finish'] = [d.strip() for d in line.replace('FINISH:', '').split(',')]
+                # Match lines like "AROMA:", "Aroma:", "**AROMA:**", etc.
+                aroma_match = re.match(r'(?:\*\*)?aroma(?:\*\*)?:?\s*(.+)', line, re.IGNORECASE)
+                flavor_match = re.match(r'(?:\*\*)?flavor(?:\*\*)?:?\s*(.+)', line, re.IGNORECASE)
+                mouthfeel_match = re.match(r'(?:\*\*)?mouthfeel(?:\*\*)?:?\s*(.+)', line, re.IGNORECASE)
+                finish_match = re.match(r'(?:\*\*)?finish(?:\*\*)?:?\s*(.+)', line, re.IGNORECASE)
+                
+                if aroma_match:
+                    descriptors['aroma'] = [d.strip() for d in aroma_match.group(1).split(',')]
+                elif flavor_match:
+                    descriptors['flavor'] = [d.strip() for d in flavor_match.group(1).split(',')]
+                elif mouthfeel_match:
+                    descriptors['mouthfeel'] = [d.strip() for d in mouthfeel_match.group(1).split(',')]
+                elif finish_match:
+                    descriptors['finish'] = [d.strip() for d in finish_match.group(1).split(',')]
             
             return descriptors
         except Exception as e:

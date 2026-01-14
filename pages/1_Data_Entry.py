@@ -203,13 +203,16 @@ with tab3:
                 
                 with col2:
                     if st.button("🗑️ Delete LOT", type="secondary"):
-                        if st.session_state.get('confirm_delete') == selected_lot:
+                        try:
                             delete_lot_data(session, selected_lot)
                             st.success(f"✅ LOT {selected_lot} deleted!")
-                            st.rerun()
-                        else:
-                            st.session_state['confirm_delete'] = selected_lot
-                            st.warning("⚠️ Click again to confirm deletion")
+                            # Clear the confirm state after successful deletion
+                            if 'confirm_delete' in st.session_state:
+                                del st.session_state['confirm_delete']
+                            # Wait a moment before suggesting refresh
+                            st.info("💡 Refresh the page to see updated list")
+                        except Exception as e:
+                            st.error(f"❌ Error deleting LOT: {str(e)}")
                 
                 # Edit form
                 with st.form("edit_lot_form"):
