@@ -73,24 +73,42 @@ with tab1:
     if input_method == "기존 LOT 선택":
         try:
             session = get_session()
-            lots = get_all_lots(session)
+            # Get unique LOT numbers
+            unique_lots = sorted(list(set([l.lot_number for l in get_all_lots(session)])))
             
-            if lots:
-                lot_numbers = [lot.lot_number for lot in lots]
-                selected_lot = st.selectbox("예측할 LOT 선택", lot_numbers)
+            selected_lot_num = st.selectbox("예측할 LOT 선택", unique_lots)
+            
+            if selected_lot_num:
+                # Fetch history for this LOT
+                history = get_all_lots(session, lot_number=selected_lot_num)
                 
-                if selected_lot:
-                    lot = get_lot_by_number(session, selected_lot)
+                # Select specific analysis record
+                selected_id = st.selectbox(
+                    "분석 데이터 선택 (날짜)",
+                    options=[h.id for h in history],
+                    format_func=lambda x: next((f"{h.production_date.strftime('%Y-%m-%d')} ({h.id})" for h in history if h.id == x), str(x))
+                )
+                
+                target_lot = next((h for h in history if h.id == selected_id), None)
+                
+                if target_lot:
+                    st.info(f"📦 선택됨: {target_lot.product_name} (LOT {target_lot.lot_number}) - {target_lot.production_date.strftime('%Y-%m-%d')}")
                     
-                    st.info(f"📦 선택됨: {lot.product_name} (LOT {lot.lot_number})")
-                    
-                    # Construct chemical data from lot
-                    # Note: currently ML models rely on fixed feature names (alcohol_content, acidity, etc)
-                    # We ensure we consistently use codes from AnalysisIndex
+                    # Construct chemical data dynamically
+                    # 1. Standard fields (if any fallback needed, but we rely on dyanmic mostly now?)
+                    # Actually standard fields in LOTData are still Alcohol, Acidity... 
+                    # But we want to use dynamic values if possible or mixed? 
+                    # Currently LOTData has columns.
                     for idx in indices:
-                        if hasattr(lot, idx.code):
-                            chemical_data[idx.code] = getattr(lot, idx.code)
+                        if hasattr(target_lot, idx.code):
+                             chemical_data[idx.code] = getattr(target_lot, idx.code)
                     
+                    # 2. Dynamic LotMeasurements
+                    from src.database import LotMeasurement
+                    msmts = session.query(LotMeasurement).filter(LotMeasurement.lot_id == target_lot.id).all()
+                    for m in msmts:
+                        chemical_data[m.index_code] = m.value
+
                     # Display chemical composition dynamically
                     st.markdown("### 🧪 화학 성분 프로파일")
                     cols = st.columns(3)

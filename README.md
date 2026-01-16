@@ -23,22 +23,19 @@ AI 기반 주류 분석 및 향미 예측 플랫폼. LOT별 화학 성분 변화
 cj_young_sommelier/
 ├── main.py                 # Streamlit 앱 진입점
 ├── data/                   # SQLite 데이터베이스 및 ML 모델
-│   ├── liquor_analytics.db (자동 생성됨)
-│   └── models/             (자동 생성됨)
 ├── src/                    # 핵심 모듈
-│   ├── __init__.py
-│   ├── database.py        # SQLite/SQLAlchemy 데이터베이스 계층
-│   ├── analysis.py        # 예측을 위한 ML 모델
-│   └── llm.py             # Google Gemini 통합
-├── pages/                  # Streamlit 페이지
-│   ├── 1_Data_Entry.py    # LOT 데이터 입력 및 관리
-│   ├── 2_Prediction.py    # 관능 점수 예측
-│   ├── 3_Sensory.py       # 관능 분석 및 프로파일링
-│   └── 4_Report.py        # AI 기반 향미 리포트
-├── knowledge_base/         # 참조 자료
+├── pages/                  # Streamlit 페이지 (1~7)
+│   ├── 1_Data_Entry.py     # 데이터 입력 및 관리
+│   ├── 2_Flavor_Analysis.py # 향미 상세 분석 (정밀/시제품)
+│   ├── 3_Analysis_Result.py # 통합 분석 결과 조회
+│   ├── 4_Prediction.py      # 품질 예측 (ML)
+│   ├── 5_Sensory.py         # 관능 평가
+│   ├── 6_Report.py          # AI 리포트 (Gemini)
+│   └── 7_Settings.py        # 시스템 설정
 ├── requirements.txt        # Python 의존성
 ├── .env.template          # 환경 변수 템플릿
-└── .gitignore             # Git 제외 규칙
+├── Dockerfile              # [NEW] 배포용 도커 설정
+└── README.md
 ```
 
 ## 설치 방법
@@ -82,11 +79,12 @@ cj_young_sommelier/
    - 브라우저에서 `http://localhost:8501` 열기
 
 3. **워크플로우**:
-   - **Step 1**: "데이터 입력" 페이지에서 LOT 데이터 추가
-   - **Step 2**: (선택 사항) 관능 점수 입력 또는 예측을 위한 ML 모델 훈련
-   - **Step 3**: "예측" 페이지에서 관능 점수 예측
-   - **Step 4**: "관능 분석" 페이지에서 관능 프로파일 작성
-   - **Step 5**: "리포트" 페이지에서 AI 리포트 생성
+   - **Step 1**: "데이터 입력"에서 신규 원료/LOT 정보 등록
+   - **Step 2**: "향미 상세 분석"에서 정밀 분석 데이터(GCMS 등) 입력
+   - **Step 3**: "전체 분석 결과"에서 통합 히스토리 확인
+   - **Step 4**: "품질 예측"에서 ML 모델을 통한 관능 점수 예측
+   - **Step 5**: "관능 평가"에서 상세 관능 프로파일링
+   - **Step 6**: "AI 리포트"에서 Gemini 기반 종합 리포트 생성
 
 ## 기능 가이드
 
@@ -153,6 +151,25 @@ cj_young_sommelier/
 
 ## 감사의 말
 
-- Streamlit으로 제작
-- Google Gemini AI 구동
-- scikit-learn을 사용한 머신러닝
+## 배포 방법
+
+### 1. 로컬 네트워크 배포 (사내 서버)
+동일한 네트워크망 내 다른 사용자가 접속하게 하려면 서버 IP를 지정하여 실행합니다.
+```bash
+streamlit run main.py --server.address 0.0.0.0 --server.port 8501
+```
+
+### 2. Docker 배포
+컨테이너 환경에서 안정적으로 배포하려면 제공된 Dockerfile을 사용합니다.
+```bash
+# 이미지 빌드
+docker build -t cj-sommelier .
+
+# 컨테이너 실행 (데이터 보존을 위한 볼륨 마운트 권장)
+docker run -d -p 8501:8501 -v $(pwd)/data:/app/data --name sommelier-app cj-sommelier
+```
+
+### 3. Streamlit Community Cloud
+GitHub 저장소와 연동하여 가장 간편하게 배포할 수 있습니다.
+- [Streamlit Cloud](https://streamlit.io/cloud) 접속 후 GitHub 레포지토리 연결
+- **Advanced settings**에서 `GEMINI_API_KEY`를 Secrets에 등록
