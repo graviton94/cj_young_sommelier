@@ -4,12 +4,15 @@ Settings Page - Manage analysis indices, units, and GCMS configuration
 
 import streamlit as st
 import pandas as pd
+import os
 import sys
 from pathlib import Path
 import json
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Add project root to path
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
 
 from src.database import (
     init_database, get_session, 

@@ -10,8 +10,10 @@ from datetime import datetime
 import sys
 from pathlib import Path
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Add project root to path
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
 
 from src.database import (
     init_database, get_session, get_lot_by_number, get_all_lots,
