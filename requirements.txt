@@ -26,3 +26,4 @@ pyarrow>=14.0.0
 
 # Environment management
 python-dotenv>=1.0.0
+pysqlite3-binary>=0.5.2

@@ -7,6 +7,18 @@ predicting sensory scores, and generating flavor reports.
 
 import streamlit as st
 from pathlib import Path
+import sys
+
+# SQLite fix for Streamlit Cloud (Linux)
+# Streamlit Cloud's system sqlite3 is often outdated; we swap it with pysqlite3
+try:
+    import platform
+    if platform.system() == 'Linux':
+        __import__('pysqlite3')
+        import sys
+        sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
 
 # Page configuration
 st.set_page_config(

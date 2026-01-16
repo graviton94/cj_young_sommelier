@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from datetime import datetime
 import sys
+import os
 from pathlib import Path
 
 # Add project root to path
