@@ -19,7 +19,7 @@ google-generativeai>=0.3.0
 
 # Chemical Utilities
 pubchempy>=1.0.4
-rdkit-pypi>=2022.9.5
+rdkit>=2023.9.1
 
 # Data processing (Parquet support)
 pyarrow>=14.0.0
