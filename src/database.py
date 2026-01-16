@@ -327,61 +327,22 @@ def init_database():
     
     # Seed default indices if table is empty
     session = SessionLocal()
+    
+    # User's current settings as of 2026-01-16
+    current_defaults = [{'code': 'alcohol_content', 'name': '알코올 도수', 'unit': '% ABV', 'min_value': 0.0, 'max_value': 100.0, 'step': 0.01, 'display_order': 1, 'category': 'basic'}, {'code': 'acidity', 'name': 'pH', 'unit': 'pH', 'min_value': 0.0, 'max_value': 14.0, 'step': 0.01, 'display_order': 2, 'category': 'basic'}, {'code': 'sugar_content', 'name': '산도', 'unit': 'ml/10ml', 'min_value': 0.0, 'max_value': None, 'step': 0.01, 'display_order': 3, 'category': 'basic'}, {'code': 'tannin_level', 'name': '알데히드', 'unit': 'mg/100ml', 'min_value': 0.0, 'max_value': 70.0, 'step': 0.1, 'display_order': 4, 'category': 'basic'}, {'code': 'ester_concentration', 'name': '메탄올', 'unit': 'mg/ml', 'min_value': 0.0, 'max_value': 0.5, 'step': 0.01, 'display_order': 5, 'category': 'basic'}, {'code': 'aldehyde_level', 'name': '밀도', 'unit': 'g/cm³', 'min_value': 0.0, 'max_value': 1.0, 'step': 1e-05, 'display_order': 6, 'category': 'basic'}, {'code': 'aroma_score', 'name': '외관/투명도', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 1, 'category': 'sensory'}, {'code': 'taste_score', 'name': '향', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 2, 'category': 'sensory'}, {'code': 'finish_score', 'name': '목넘김', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 3, 'category': 'sensory'}, {'code': 'overall_score', 'name': '바디감', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 4, 'category': 'sensory'}, {'code': 'item_749c568a', 'name': '단맛', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 5, 'category': 'sensory'}, {'code': 'item_280cde40', 'name': '신맛', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 6, 'category': 'sensory'}, {'code': 'item_d9bb676d', 'name': '쓴맛', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 7, 'category': 'sensory'}, {'code': 'item_610b6d61', 'name': '청량감', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 8, 'category': 'sensory'}, {'code': 'item_f45aea98', 'name': '피니쉬', 'unit': '점', 'min_value': -4.0, 'max_value': 4.0, 'step': 1.0, 'display_order': 9, 'category': 'sensory'}, {'code': 'item_eb6cd9e2', 'name': '종합 차이', 'unit': '점', 'min_value': 0.0, 'max_value': 8.0, 'step': 1.0, 'display_order': 10, 'category': 'sensory'}, {'code': 'flavor_fruity', 'name': '과일향', 'unit': '점', 'min_value': 0.0, 'max_value': 20.0, 'step': 0.1, 'display_order': 1, 'category': 'flavor_indicator'}, {'code': 'flavor_acidic', 'name': '아세톤향', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.1, 'display_order': 2, 'category': 'flavor_indicator'}, {'code': 'flavor_sweetness', 'name': '단맛', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.1, 'display_order': 3, 'category': 'flavor_indicator'}, {'code': 'flavor_body', 'name': '신맛', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.1, 'display_order': 4, 'category': 'flavor_indicator'}, {'code': 'flavor_balance', 'name': '바디감', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.1, 'display_order': 5, 'category': 'flavor_indicator'}, {'code': 'item_371d88c4', 'name': '지속성, 여운(Finish)', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.1, 'display_order': 6, 'category': 'flavor_indicator'}, {'code': 'item_ee198c4f', 'name': '목넘김', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.1, 'display_order': 7, 'category': 'flavor_indicator'}]
+
     if session.query(AnalysisIndex).count() == 0:
-        defaults = [
-            # Basic Physicochemical Properties
-            {'code': 'alcohol_content', 'name': '알코올 도수', 'unit': '% ABV', 'min_value': 0.0, 'max_value': 100.0, 'step': 0.1, 'display_order': 1, 'category': 'basic'},
-            {'code': 'acidity', 'name': '산도', 'unit': 'pH', 'min_value': 0.0, 'max_value': 14.0, 'step': 0.1, 'display_order': 2, 'category': 'basic'},
-            {'code': 'sugar_content', 'name': '당 함량', 'unit': 'g/L', 'min_value': 0.0, 'max_value': None, 'step': 0.1, 'display_order': 3, 'category': 'basic'},
-            {'code': 'tannin_level', 'name': '타닌 수치', 'unit': 'mg/L', 'min_value': 0.0, 'max_value': None, 'step': 0.1, 'display_order': 4, 'category': 'basic'},
-            {'code': 'ester_concentration', 'name': '에스터 농도', 'unit': 'mg/L', 'min_value': 0.0, 'max_value': None, 'step': 0.1, 'display_order': 5, 'category': 'basic'},
-            {'code': 'aldehyde_level', 'name': '알데히드 수치', 'unit': 'mg/L', 'min_value': 0.0, 'max_value': None, 'step': 0.1, 'display_order': 6, 'category': 'basic'},
-            
-            # Sensory Scores
-            {'code': 'aroma_score', 'name': '향 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 1, 'category': 'sensory'},
-            {'code': 'taste_score', 'name': '맛 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 2, 'category': 'sensory'},
-            {'code': 'finish_score', 'name': '여운 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 3, 'category': 'sensory'},
-            {'code': 'overall_score', 'name': '종합 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 4, 'category': 'sensory'},
-            
-            # Example GCMS Compounds
-            {'code': 'ethyl_acetate', 'name': 'Ethyl Acetate', 'unit': 'mg/L', 'flavor_hint': '과일향, 파인애플, 달콤함', 'csv_header': 'Peak_EthylAc', 'category': 'gcms', 'display_order': 10},
-            {'code': 'isoamyl_acetate', 'name': 'Isoamyl Acetate', 'unit': 'mg/L', 'flavor_hint': '바나나, 배', 'csv_header': 'Peak_IsoAmyl', 'category': 'gcms', 'display_order': 11}
-        ]
-        
-        for item in defaults:
+        for item in current_defaults:
             idx = AnalysisIndex(**item)
             session.add(idx)
         session.commit()
     else:
-        # Check if sensory scores exist (for existing DBs)
-        if session.query(AnalysisIndex).filter_by(category='sensory').count() == 0:
-            defaults = [
-                {'code': 'aroma_score', 'name': '향 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 1, 'category': 'sensory'},
-                {'code': 'taste_score', 'name': '맛 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 2, 'category': 'sensory'},
-                {'code': 'finish_score', 'name': '여운 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 3, 'category': 'sensory'},
-                {'code': 'overall_score', 'name': '종합 점수', 'unit': '점', 'min_value': 0.0, 'max_value': 100.0, 'step': 1.0, 'display_order': 4, 'category': 'sensory'}
-            ]
-            for item in defaults:
-                # Check if code exists (legacy might have stuck it in basic?)
-                if not session.query(AnalysisIndex).filter_by(code=item['code']).first():
-                    idx = AnalysisIndex(**item)
-                    session.add(idx)
-            session.commit()
-            
-        # Check if flavor indicators exist
-        if session.query(AnalysisIndex).filter_by(category='flavor_indicator').count() == 0:
-            defaults_flavor = [
-                {'code': 'flavor_fruity', 'name': '과일향 강도', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.5, 'display_order': 1, 'category': 'flavor_indicator'},
-                {'code': 'flavor_acidic', 'name': '산미 강도', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.5, 'display_order': 2, 'category': 'flavor_indicator'},
-                {'code': 'flavor_sweetness', 'name': '단맛 강도', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.5, 'display_order': 3, 'category': 'flavor_indicator'},
-                {'code': 'flavor_body', 'name': '바디감', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.5, 'display_order': 4, 'category': 'flavor_indicator'},
-                {'code': 'flavor_balance', 'name': '밸런스', 'unit': '점', 'min_value': 0.0, 'max_value': 10.0, 'step': 0.5, 'display_order': 5, 'category': 'flavor_indicator'}
-            ]
-            for item in defaults_flavor:
-                if not session.query(AnalysisIndex).filter_by(code=item['code']).first():
-                    idx = AnalysisIndex(**item)
-                    session.add(idx)
-            session.commit()
+        # Check and add missing items one by one for existing DBs
+        for item in current_defaults:
+            if not session.query(AnalysisIndex).filter_by(code=item['code']).first():
+                idx = AnalysisIndex(**item)
+                session.add(idx)
+        session.commit()
             
     session.close()
     
