@@ -2,6 +2,10 @@
 
 본 보고서는 금일 진행된 '데이터 관리 체계 통합 및 UI/UX 고도화' 작업 내용을 요약합니다.
 
+## 0. 저장소 (Repository) 정보
+- **공식 저장소**: [https://github.com/graviton94/cj_young_sommelier](https://github.com/graviton94/cj_young_sommelier)
+- **현재 로컬 경로**: `c:\cj_young_sommelier` (동기화 권장)
+
 ## 1. 주요 개선 사항 요약
 
 ### 🔹 데이터 플랫폼 통합 (Database Unification)
