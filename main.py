@@ -48,9 +48,9 @@ def main():
     1. **📊 데이터 입력** - 신규 LOT 등록 및 기본 화학 성분 입력
     2. **🧪 향미 상세 분석** - 시제품 및 LOT의 향미/성능 정밀 분석 기록
     3. **📋 전체 분석 결과** - 모든 분석 이력 통합 조회 및 데이터 관리(수정/삭제)
-    4. **🎯 예측** - 머신러닝 기반 관능 점수 예측
+    4. **🎯 예측** - 머신러닝 기반 관능 점수 예측 (🚧 개발 중 🚧)
     5. **👃 관능 분석** - 관능 평가 시각화 및 비교 분석
-    6. **📝 AI 리포트** - Google Gemini를 활용한 종합 향미 보고서 생성
+    6. **📝 AI 리포트** - Google Gemini를 활용한 종합 향미 보고서 생성 (🚧 개발 중 🚧)
     7. **⚙️ 시스템 설정** - 분석 항목, 단위, GCMS 물질 라이브러리 관리
     
     ### 플랫폼 소개
@@ -66,10 +66,10 @@ def main():
         st.metric("데이터베이스", "준비됨", delta="SQLite")
     
     with col2:
-        st.metric("머신러닝 모델", "준비됨", delta="sklearn")
+        st.metric("머신러닝 모델", "(🚧 개발 중 🚧)", delta="sklearn")
     
     with col3:
-        st.metric("AI 엔진", "준비됨", delta="Gemini")
+        st.metric("AI 엔진", "(🚧 개발 중 🚧)", delta="Gemini")
     
     # Information section
     with st.expander("ℹ️ 시스템 정보"):

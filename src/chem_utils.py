@@ -45,7 +45,7 @@ def lookup_compound(query_string):
             'name': cmpd.synonyms[0] if cmpd.synonyms else query_string,
             'iupac_name': cmpd.iupac_name,
             'cas_number': None, # PubChemPy doesn't always easily give CAS. We rely on user input often or parse synonyms.
-            'smiles': cmpd.isomeric_smiles,
+            'smiles': cmpd.smiles,
             'molecular_formula': cmpd.molecular_formula,
             'molecular_weight': float(cmpd.molecular_weight) if cmpd.molecular_weight else 0.0,
             'cid': cmpd.cid

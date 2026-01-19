@@ -6,6 +6,10 @@ import os
 from typing import Dict, List, Optional
 import google.generativeai as genai
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load .env file if present
+load_dotenv()
 
 
 class GeminiFlavorReporter:
@@ -29,8 +33,8 @@ class GeminiFlavorReporter:
             )
         
         genai.configure(api_key=self.api_key)
-        # Using gemini-1.5-flash for better performance and compatibility
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        # Using full model path for better compatibility
+        self.model = genai.GenerativeModel('models/gemini-pro-latest')
     
     def generate_flavor_report(
         self,
@@ -251,6 +255,70 @@ FINISH: descriptor1, descriptor2, descriptor3...
                 'mouthfeel': [],
                 'finish': []
             }
+
+    def predict_compound_info(self, name: str, cas: str, mw: float, log_p: float, groups: str, baseline_threshold: float = 0.0) -> Dict:
+        """
+        AI-based prediction of odor threshold and flavor descriptions for a compound.
+        Includes a baseline threshold derived from local similarity for grounding.
+        """
+        # API Key check for debugging
+        if not self.api_key:
+             return {'threshold': baseline_threshold, 'error': 'API Key missing'}
+
+        prompt = f"""As an expert flavor chemist and AI Sommelier (CJ Young), 
+analyze this chemical compound and provide your expert predictions.
+
+**Compound Info:**
+- Name: {name}
+- CAS: {cas}
+- Molecular Weight: {mw}
+- LogP: {log_p}
+- Functional Groups: {groups}
+
+**Local Similarity Baseline:**
+- Estimated Threshold: {baseline_threshold} ppm (Based on nearest neighbors in our Master DB)
+
+Please provide:
+1. Odor Threshold (ppm): Provide your final expert prediction. Consider the provided baseline as a reference grounded in our specific database, but adjust it if your broader knowledge suggests a more accurate value for this specific molecule.
+2. Flavor Description (Korean): 1-3 comma-separated terms (e.g., '과일향, 바나나').
+3. Flavor Description (English): 1-3 comma-separated terms (e.g., 'fruity, banana').
+
+Format your response strictly as JSON:
+{{
+  "threshold": float,
+  "desc_ko": "string",
+  "desc_en": "string",
+  "justification": "Brief explanation of why you adjusted or kept the baseline"
+}}
+"""
+        try:
+            # Use JSON parsing for structured output
+            response = self.model.generate_content(prompt)
+            if not response or not response.text:
+                return {'threshold': baseline_threshold, 'error': 'Empty response from AI'}
+
+            import json
+            import re
+            
+            # Extract JSON from response text (handle potential markdown formatting)
+            json_match = re.search(r'\{.*\}', response.text, re.DOTALL)
+            if json_match:
+                try:
+                    content = json.loads(json_match.group())
+                    return {
+                        'threshold': float(content.get('threshold', baseline_threshold)),
+                        'desc_ko': content.get('desc_ko', ''),
+                        'desc_en': content.get('desc_en', ''),
+                        'justification': content.get('justification', '')
+                    }
+                except json.JSONDecodeError:
+                    return {'threshold': baseline_threshold, 'error': 'JSON Decode Error'}
+            
+            return {'threshold': baseline_threshold, 'error': 'No JSON found in response'}
+        except Exception as e:
+            error_msg = str(e)
+            print(f"Prediction Error: {error_msg}")
+            return {'threshold': baseline_threshold, 'error': error_msg}
     
     def _format_chemical_data(self, chemical_data: Dict) -> str:
         """Format chemical data for prompt inclusion"""

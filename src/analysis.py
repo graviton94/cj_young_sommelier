@@ -1,5 +1,5 @@
 """
-Analysis module for ML-based sensory score prediction using scikit-learn and pandas
+Analysis module for ML-based sensory score prediction and Flavor Master DB management.
 """
 
 import pandas as pd
@@ -10,11 +10,15 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import pickle
+import os
 from pathlib import Path
 
-# Model storage path
-MODEL_DIR = Path(__file__).resolve().parent.parent / "data" / "models"
+# Project root and data paths
+project_root = Path(__file__).resolve().parent.parent
+MODEL_DIR = project_root / "data" / "models"
 MODEL_DIR.mkdir(exist_ok=True, parents=True)
+
+MASTER_DB_PATH = project_root / "data" / "master_flavor_db.csv"
 
 
 class SensoryPredictor:
@@ -23,13 +27,6 @@ class SensoryPredictor:
     """
     
     def __init__(self, model_type='random_forest'):
-        """
-        Initialize the predictor with a specific model type
-        
-        Args:
-            model_type: Type of regression model to use
-                       ('random_forest', 'gradient_boosting', 'linear', 'ridge', 'lasso')
-        """
         self.model_type = model_type
         self.models = {}
         self.scalers = {}
@@ -48,13 +45,11 @@ class SensoryPredictor:
             'overall_score'
         ]
         
-        # Initialize models for each target
         for target in self.target_names:
             self.models[target] = self._get_model(model_type)
             self.scalers[target] = StandardScaler()
     
     def _get_model(self, model_type):
-        """Get model instance based on type"""
         models = {
             'random_forest': RandomForestRegressor(n_estimators=100, random_state=42),
             'gradient_boosting': GradientBoostingRegressor(n_estimators=100, random_state=42),
@@ -65,21 +60,11 @@ class SensoryPredictor:
         return models.get(model_type, RandomForestRegressor(n_estimators=100, random_state=42))
     
     def prepare_data(self, lot_data_list):
-        """
-        Prepare data from LOT records for training or prediction
-        
-        Args:
-            lot_data_list: List of LOTData objects or dictionaries
-        
-        Returns:
-            Tuple of (features_df, targets_df)
-        """
         data = []
         for lot in lot_data_list:
             if isinstance(lot, dict):
                 data.append(lot)
             else:
-                # Convert SQLAlchemy object to dict
                 data.append({
                     'alcohol_content': lot.alcohol_content,
                     'acidity': lot.acidity,
@@ -94,96 +79,52 @@ class SensoryPredictor:
                 })
         
         df = pd.DataFrame(data)
-        
-        # Handle missing values with explicit strategy
-        # For chemical parameters, use median instead of mean to be more robust to outliers
-        # Zero is not appropriate for all parameters, so we use median of available data
         for col in self.feature_names:
             if col in df.columns and df[col].isnull().any():
-                # Use median for more robust imputation
                 median_val = df[col].median()
                 if pd.isna(median_val):
-                    # If all values are NaN, use reasonable default
                     median_val = 0.0
                 df[col] = df[col].fillna(median_val)
         
         features = df[self.feature_names]
         targets = df[self.target_names] if all(t in df.columns for t in self.target_names) else None
-        
         return features, targets
     
     def train(self, lot_data_list, test_size=0.2):
-        """
-        Train the prediction models
-        
-        Args:
-            lot_data_list: List of LOTData objects with complete sensory scores
-            test_size: Fraction of data to use for testing
-        
-        Returns:
-            Dictionary containing training metrics
-        """
         features, targets = self.prepare_data(lot_data_list)
-        
         if targets is None or len(features) < 5:
             raise ValueError("Insufficient data for training. Need at least 5 samples with sensory scores.")
         
         metrics = {}
-        
         for target_name in self.target_names:
             y = targets[target_name]
-            
-            # Split data
-            X_train, X_test, y_train, y_test = train_test_split(
-                features, y, test_size=test_size, random_state=42
-            )
-            
-            # Scale features
+            X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=test_size, random_state=42)
             X_train_scaled = self.scalers[target_name].fit_transform(X_train)
             X_test_scaled = self.scalers[target_name].transform(X_test)
-            
-            # Train model
             self.models[target_name].fit(X_train_scaled, y_train)
-            
-            # Evaluate
             y_pred = self.models[target_name].predict(X_test_scaled)
-            
             metrics[target_name] = {
                 'r2': r2_score(y_test, y_pred),
                 'rmse': np.sqrt(mean_squared_error(y_test, y_pred)),
                 'mae': mean_absolute_error(y_test, y_pred)
             }
-        
         return metrics
     
     def predict(self, chemical_data):
-        """
-        Predict sensory scores from chemical composition
-        
-        Args:
-            chemical_data: Dictionary or DataFrame with chemical features
-        
-        Returns:
-            Dictionary with predicted scores
-        """
         if isinstance(chemical_data, dict):
             features = pd.DataFrame([chemical_data])[self.feature_names]
         else:
             features = chemical_data[self.feature_names]
         
         predictions = {}
-        
         for target_name in self.target_names:
             features_scaled = self.scalers[target_name].transform(features)
             pred = self.models[target_name].predict(features_scaled)
             predictions[target_name] = float(pred[0])
-        
         return predictions
     
     def save_models(self, prefix='sensory_predictor'):
-        """Save trained models and scalers to disk"""
         model_path = MODEL_DIR / f"{prefix}_{self.model_type}.pkl"
-        
         data_to_save = {
             'models': self.models,
             'scalers': self.scalers,
@@ -191,17 +132,13 @@ class SensoryPredictor:
             'feature_names': self.feature_names,
             'target_names': self.target_names
         }
-        
         with open(model_path, 'wb') as f:
             pickle.dump(data_to_save, f)
-        
         return model_path
     
     def load_models(self, model_path):
-        """Load trained models and scalers from disk"""
         with open(model_path, 'rb') as f:
             data = pickle.load(f)
-        
         self.models = data['models']
         self.scalers = data['scalers']
         self.model_type = data['model_type']
@@ -210,18 +147,8 @@ class SensoryPredictor:
 
 
 def generate_correlation_analysis(lot_data_list):
-    """
-    Generate correlation analysis between chemical features and sensory scores
-    
-    Args:
-        lot_data_list: List of LOTData objects
-    
-    Returns:
-        Pandas DataFrame with correlation matrix
-    """
     predictor = SensoryPredictor()
     features, targets = predictor.prepare_data(lot_data_list)
-    
     if targets is not None:
         combined = pd.concat([features, targets], axis=1)
         return combined.corr()
@@ -230,20 +157,120 @@ def generate_correlation_analysis(lot_data_list):
 
 
 def get_feature_importance(predictor, target_name):
-    """
-    Get feature importance for tree-based models
-    
-    Args:
-        predictor: Trained SensoryPredictor instance
-        target_name: Target variable name
-    
-    Returns:
-        Dictionary of feature importances
-    """
     model = predictor.models[target_name]
-    
     if hasattr(model, 'feature_importances_'):
         importance = dict(zip(predictor.feature_names, model.feature_importances_))
         return dict(sorted(importance.items(), key=lambda x: x[1], reverse=True))
     else:
         return None
+
+
+class FlavorAnalyzer:
+    """
+    Manager for the Flavor Master DB and ETL of GCMS data using CSV format.
+    """
+    def __init__(self):
+        self.df = pd.DataFrame()
+        self.db_path = MASTER_DB_PATH
+        self._load_db()
+
+    def _load_db(self):
+        if self.db_path.exists():
+            try:
+                self.df = pd.read_csv(self.db_path)
+                # Ensure Threshold is numeric to avoid Arrow/Parquet type issues
+                if 'Threshold' in self.df.columns:
+                    self.df['Threshold'] = pd.to_numeric(self.df['Threshold'], errors='coerce').fillna(0.0)
+            except Exception as e:
+                print(f"Error loading Master DB CSV: {e}")
+                self.df = pd.DataFrame()
+
+    def _save_db(self):
+        try:
+            self.df.to_csv(self.db_path, index=False, encoding='utf-8-sig')
+        except Exception as e:
+            print(f"Error saving Master DB CSV: {e}")
+
+    def predict_compound_info_local(self, mw, logp, groups):
+        """
+        Predict compound info (threshold, descriptions) based on local similarity.
+        Returns a dictionary with predicted values and justification.
+        """
+        if self.df.empty:
+            return {'threshold': 0.0, 'desc_ko': '', 'desc_en': '', 'justification': 'DB가 비어 있습니다.'}
+
+        try:
+            target_mw = float(mw) if mw else 0.0
+            target_logp = float(logp) if logp else 0.0
+        except (ValueError, TypeError):
+            return {'threshold': 0.0, 'desc_ko': '', 'desc_en': '', 'justification': '부적절한 물리적 속성 값'}
+
+        target_groups = set([g.strip().lower() for g in str(groups).replace(',', ' ').split() if g.strip()])
+
+        # 비교 대상 데이터 준비
+        valid_df = self.df.copy()
+        valid_df['MW'] = pd.to_numeric(valid_df.get('MW'), errors='coerce')
+        valid_df['LogP'] = pd.to_numeric(valid_df.get('LogP'), errors='coerce')
+        valid_df['Threshold'] = pd.to_numeric(valid_df.get('Threshold'), errors='coerce')
+        
+        # 물리적 속성이 있는 항목들 (역치는 나중에 처리)
+        valid_df = valid_df.dropna(subset=['MW', 'LogP'])
+        
+        if valid_df.empty:
+            return {'threshold': 0.0, 'desc_ko': '', 'desc_en': '', 'justification': '비교 가능한 데이터가 없습니다.'}
+
+        def calc_similarity(row):
+            # 정규화 거리 (MW: 0-500, LogP: -5~10 가정)
+            mw_dist = abs(row['MW'] - target_mw) / 300.0
+            logp_dist = abs(row['LogP'] - target_logp) / 10.0
+            
+            # 작용기 유사도 (Jaccard)
+            row_groups = set([g.strip().lower() for g in str(row.get('Groups', '')).replace(',', ' ').split() if g.strip()])
+            if not target_groups and not row_groups:
+                group_penalty = 0.0
+            elif not target_groups or not row_groups:
+                group_penalty = 0.8
+            else:
+                intersection = len(target_groups.intersection(row_groups))
+                union = len(target_groups.union(row_groups))
+                group_penalty = 1.0 - (intersection / union)
+            
+            return (mw_dist * 0.3) + (logp_dist * 0.3) + (group_penalty * 0.4)
+
+        valid_df['distance'] = valid_df.apply(calc_similarity, axis=1)
+        neighbors = valid_df.sort_values('distance').head(5)
+
+        # 1. 역치 예측 (역치가 있는 인접 항목들만 사용)
+        thr_neighbors = neighbors[neighbors['Threshold'] > 0]
+        predicted_threshold = 0.0
+        if not thr_neighbors.empty:
+            weights = 1.0 / (thr_neighbors['distance'] + 0.01)
+            predicted_threshold = round(float(np.average(thr_neighbors['Threshold'], weights=weights)), 6)
+
+        # 2. 묘사 예측 (태그 빈도 기반)
+        def get_top_tags(df, col):
+            tags = []
+            for val in df[col].dropna():
+                # Split by comma, strip, and ignore 'nan' strings
+                parts = [t.strip() for t in str(val).split(',') if t.strip() and str(t).lower() != 'nan']
+                tags.extend(parts)
+            if not tags: return ""
+            
+            # value_counts().index can be non-string if tags are somehow weird
+            top_tags = pd.Series(tags).value_counts().head(3).index.tolist()
+            return ", ".join([str(t) for t in top_tags])
+
+        desc_ko = get_top_tags(neighbors, 'Desc_Korean')
+        desc_en = get_top_tags(neighbors, 'Desc_English')
+
+        # 3. 근거 요약 (null 또는 'nan' 필사)
+        valid_names = [str(n) for n in neighbors['Name_Common'].dropna().tolist() if str(n).strip() and str(n).lower() != 'nan']
+        neighbor_names = ", ".join(valid_names[:3])
+        justification = f"가장 유사한 성분({neighbor_names} 등)의 데이터를 기반으로 추정한 결과입니다." if neighbor_names else "유사한 성분들의 데이터를 기반으로 추정한 결과입니다."
+
+        return {
+            'threshold': predicted_threshold,
+            'desc_ko': desc_ko,
+            'desc_en': desc_en,
+            'justification': justification
+        }

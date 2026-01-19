@@ -201,7 +201,7 @@ with tab1:
                     title="관능 점수 프로파일"
                 )
                 
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
                 
         except Exception as e:
             st.error(f"❌ 예측 오류: {str(e)}")
@@ -250,7 +250,7 @@ with tab2:
                         st.markdown("### 📊 모델 성능 메트릭")
                         
                         metrics_df = pd.DataFrame(metrics).T
-                        st.dataframe(metrics_df.style.format("{:.4f}"), use_container_width=True)
+                        st.dataframe(metrics_df.style.format("{:.4f}"), width='stretch')
                         
                         # Visualize metrics
                         fig = go.Figure()
@@ -270,7 +270,7 @@ with tab2:
                             barmode='group'
                         )
                         
-                        st.plotly_chart(fig, use_container_width=True)
+                        st.plotly_chart(fig, width='stretch')
                         
                     except Exception as e:
                         st.error(f"❌ 훈련 오류: {str(e)}")
@@ -322,14 +322,14 @@ with tab3:
                         labels={'x': '중요도', 'y': '특성'}
                     )
                     
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width='stretch')
                     
                     # Show as table
                     importance_df = pd.DataFrame({
                         '특성': formatted_importance.keys(),
                         '중요도': formatted_importance.values()
                     })
-                    st.dataframe(importance_df, use_container_width=True)
+                    st.dataframe(importance_df, width='stretch')
             else:
                 st.info("ℹ️ 특성 중요도는 트리 기반 모델(Random Forest, Gradient Boosting)에서만 사용할 수 있습니다")
         else:
@@ -377,11 +377,11 @@ with tab4:
             )
             
             fig.update_layout(height=600)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             # Show correlation table
             with st.expander("📋 상관관계 값 보기"):
-                st.dataframe(corr_matrix.style.background_gradient(cmap='RdBu_r', axis=None), use_container_width=True)
+                st.dataframe(corr_matrix.style.background_gradient(cmap='RdBu_r', axis=None), width='stretch')
         else:
             st.warning("⚠️ 상관관계 분석을 위해서는 최소 3개의 LOT 기록이 필요합니다.")
         

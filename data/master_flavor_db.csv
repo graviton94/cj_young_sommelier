@@ -1,0 +1,142 @@
+﻿CAS,Name_Common,Desc_Korean,Threshold,Is_AAC,Desc_English,MW,LogP,Groups,SMILES
+109-92-2,Ethyl vinyl ether,"지방취, 초콜릿",0.15,False,"Chocolate, Fatty",72.11,1.1664,"Alkene, Ether",CCOC=C
+75-07-0,acetaldehyde,퀴퀴함,0.7,True,Musty,44.05,0.2052,Aldehyde,CC=O
+78-84-2,isobutyraldehyde,꽃,0.0,False,Floral,72.107,0.8412999999999999,Carbonyls - Aldehydes,CC(C)C=O
+67-64-1,acetone,"배, 사과",0.0,False,"Apple, Pear",58.08,0.5952999999999999,Carbonyls - Ketones,CC(=O)C
+109-94-4,ethyl formate,"발효취, 장미",0.0,False,"Fermented, Rose",74.07900000000001,0.1793,Esters,CCOC=O
+79-20-9,methyl acetate,단향,0.0,False,Sweet,74.07900000000001,0.1793,Esters,CC(=O)OC
+141-78-6,ethyl acetate,"단향, 포도",0.0,False,"Grape, Sweet",88.106,0.5694,Esters,CCOC(=O)C
+105-57-7,acetal,"견과류, 단향, 배, 흙향",4.9,True,"Earthy, Nutty, Pear, Sweet",118.176,1.4054,Acetals,CCOC(C)OCC
+96-17-3,2-methyl butyraldehyde,"견과류, 발효취, 엿기름(몰트), 지방취, 초콜릿, 커피, 퀴퀴함",0.0,False,"Chocolate, Coffee, Fatty, Fermented, Malt, Musty, Nutty",86.13399999999999,1.2314,Carbonyls - Aldehydes,CCC(C)C=O
+590-86-3,isovaleraldehyde,"복숭아, 지방취, 초콜릿",0.15,True,"Chocolate, Fatty, Peach",86.13399999999999,1.2314,Carbonyls - Aldehydes,CC(C)CC=O
+64-17-5,ethanol,알코올,3500.0,True,"alcoholic, ethereal, medicinal",46.069,-0.0014,Alcohols,CCO
+124-18-5,decane,,0.0,False,,142.286,4.147000000000004,Hydrocarbons,CCCCCCCCCC
+110-19-0,isobutyl acetate,"꽃, 단향, 바나나, 사과",25.0,True,"Apple, Banana, Floral, Sweet",116.15999999999998,1.2055,Esters,CC(C)COC(=O)C
+2051-30-1,"2,6-dimethyl octane",,0.0,False,,142.286,3.858800000000003,Hydrocarbons,CCC(C)CCCC(C)C
+105-54-4,ethyl butyrate,"단향, 사과, 솔잎, 오렌지, 파인애플",0.001,True,"Apple, Orange, Pine, Pineapple, Sweet",116.15999999999998,1.3496,Esters,CCCC(=O)OCC
+108-88-3,toluene,단향,0.0,False,Sweet,92.141,1.99502,Hydrocarbons -benzenes,CC1=CC=CC=C1
+71-23-8,propyl alcohol,"단향, 발효취, 배, 사과, 퀴퀴함, 효모(누룩)",0.0,False,"Apple, Fermented, Musty, Pear, Sweet, Yeast",60.096,0.3887,Alcohols,CCCO
+7452-79-1,ethyl 2-methyl butyrate,"날카로움, 단향, 베리류, 사과, 오렌지",0.006,True,"Apple, Berry, Orange, Sharp, Sweet",130.18699999999998,1.5956,Esters,CCC(C)C(=O)OCC
+108-64-5,ethyl isovalerate,"날카로움, 단향, 사과, 솔잎, 오렌지, 파인애플",0.01,True,"Apple, Orange, Pine, Pineapple, Sharp, Sweet",130.18699999999998,1.5956,Esters,CCOC(=O)CC(C)C
+624-92-0,dimethyl disulfide,양배추,0.0,False,Cabbage,94.204,1.6274,Sulfur Compounds,CSSC
+3658-79-5,valeraldehyde diethyl acetal,,0.0,False,,160.25699999999998,2.5757000000000003,Acetals,CCCCC(OCC)OCC
+3842-03-3,isovaleraldehyde diethyl acetal,지방취,0.0,False,Fatty,160.25699999999998,2.4316000000000004,Acetals,CCOC(CC(C)C)OCC
+66-25-1,hexanal,"나무, 잔디, 지방취",0.0,False,"Fatty, Grassy, Woody",100.161,1.7656,Carbonyls - Aldehydes,CCCCCC=O
+1120-21-4,undecane,,0.0,False,,156.313,4.537100000000004,Hydrocarbons,CCCCCCCCCCC
+78-83-1,isobutyl alcohol,바나나,360.0,True,Banana,74.12299999999999,0.6347,Alcohols,CC(C)CO
+123-92-2,isoamyl acetate,"단향, 바나나",0.15,True,"Banana, Sweet",130.18699999999998,1.5956,Esters,CC(C)CCOC(=O)C
+106-42-3,para-xylene,,0.0,False,,106.168,2.30344,Hydrocarbons -benzenes,CC1=CC=C(C=C1)C
+95-47-6,ortho-xylene,,0.0,False,geranium,106.168,2.30344,Hydrocarbons -benzenes,CC1=CC=CC=C1C
+110-43-0,2-heptanone,"나무, 단향, 바나나, 코코넛, 크리미, 향신료, 허브류",0.0,False,"Banana, Coconut, Creamy, Herbal, Spicy, Sweet, Woody",114.188,2.1557000000000004,Carbonyls - Ketones,CCCCCC(=O)C
+112-40-3,dodecane,,0.0,False,,170.33999999999995,4.9272000000000045,Hydrocarbons,CCCCCCCCCCCC
+105-68-0,isoamyl propionate,"단향, 바나나, 사과, 솔잎, 열대과일, 파인애플",8.6,True,"Apple, Banana, Pine, Pineapple, Sweet, Tropical fruit",144.21399999999997,1.9857,Esters,CCC(=O)OCCC(C)C
+5989-27-5,d-limonene,"시트러스, 오렌지, 허브류",4.0,True,"Citrus, Herbal, Orange",136.238,3.308900000000002,"terpenes, terpenoids",CC1=CC[C@@H](CC1)C(=C)C
+110-86-1,pyridine,신맛,0.0,False,Sour,79.10199999999998,1.0816,Bases,C1=CC=NC=C1
+103-65-1,phenylpropane,,0.0,False,,120.19499999999996,2.639100000000001,Hydrocarbons -benzenes,CCCC1=CC=CC=C1
+123-51-3,isoamyl alcohol,"바나나, 발효취",4.0,True,"Banana, Fermented",88.14999999999999,1.0248,Alcohols,CC(C)CCO
+3777-69-3,2-pentyl furan,"금속맛, 풋콩, 흙향",5.8,True,"Bean, Earthy, Metallic",138.20999999999998,3.012300000000001,Furans,CCCCCC1=CC=CO1
+123-66-0,ethyl hexanoate,"단향, 바나나, 사과, 솔잎, 왁시, 지방취, 파인애플",0.01,True,"Apple, Banana, Fatty, Pine, Pineapple, Sweet, Waxy",144.21399999999997,2.1298000000000004,Esters,CCCCCC(=O)OCC
+100-42-5,styrene,"꽃, 단향, 아몬드, 플라스틱",0.0,False,"Almond, Floral, Plastic, Sweet",104.15199999999996,2.3296,Hydrocarbons -benzenes,C=CC1=CC=CC=C1
+106-27-4,isoamyl butyrate,"단향, 멜론, 바나나, 배, 사과, 살구",0.0,False,"Apple, Apricot, Banana, Melon, Pear, Sweet",158.241,2.375800000000001,Esters,CCCC(=O)OCCC(C)C
+142-92-7,hexyl acetate,"단향, 바나나, 배, 사과, 지방취",0.0,False,"Apple, Banana, Fatty, Pear, Sweet",144.214,2.1298000000000004,Esters,CCCCCCOC(=O)C
+617-35-6,ethyl pyruvate,"날카로움, 단향, 캐러멜",0.0,False,"Caramel, Sharp, Sweet",116.116,0.1384999999999999,Esters,CCOC(=O)C(=O)C
+109-08-0,2-methyl pyrazine,"견과류, 초콜릿, 퀴퀴함, 흙향",0.0,False,"Chocolate, Earthy, Musty, Nutty",94.117,0.7850199999999999,pyrazines,CC1=NC=CN=C1
+108-67-8,mesitylene,,0.0,False,,120.19499999999998,2.611860000000001,Hydrocarbons -benzenes,CC1=CC(=CC(=C1)C)C
+70424-13-4,(Z)-2-(2-pentenyl) furan,,0.0,False,,136.194,2.7883000000000013,Furans,CC/C=C\CC1=CC=CO1
+513-86-0,acetoin,"단향, 버터, 유제품, 지방취, 크리미",0.0,False,"Buttery, Creamy, Dairy, Fatty, Sweet",88.106,-0.0438,Carbonyls - Ketones,CC(C(=O)C)O
+7789-92-6,3-ethoxypropanal diethyl acetal,,0.0,False,,176.25599999999997,1.8121,Acetals,CCOCCC(OCC)OCC
+104-51-8,butyl benzene,,0.0,False,,134.22199999999998,3.029200000000001,Hydrocarbons -benzenes,CCCCC1=CC=CC=C1
+626-77-7,propyl hexanoate,"단향, 사과, 솔잎, 파인애플",0.0,False,"Apple, Pine, Pineapple, Sweet",158.24099999999996,2.5199000000000007,Esters,CCCCCC(=O)OCCC
+535-77-3,meta-cymene,,0.0,False,,134.22199999999998,3.118420000000002,"terpenes, terpenoids",CC1=CC(=CC=C1)C(C)C
+3777-70-6,2-hexyl furan,,0.0,False,,152.237,3.402400000000002,Furans,CCCCCCC1=CC=CO1
+106-30-9,ethyl heptanoate,"단향, 바나나, 베리류, 사과, 솔잎, 파인애플",0.0,False,"Apple, Banana, Berry, Pine, Pineapple, Sweet",158.241,2.5199000000000007,Esters,CCCCCCC(=O)OCC
+123-32-0,"2,5-dimethyl pyrazine","견과류, 나무, 잔디, 초콜릿, 퀴퀴함, 흙향",0.0,False,"Chocolate, Earthy, Grassy, Musty, Nutty, Woody",108.144,1.0934399999999995,pyrazines,CC1=CN=C(C=N1)C
+13925-00-3,2-ethyl pyrazine,"견과류, 나무, 발효취, 커피, 퀴퀴함",0.0,False,"Coffee, Fermented, Musty, Nutty, Woody",108.14399999999998,1.039,pyrazines,CCC1=NC=CN=C1
+109-87-5,dimethoxymethane,,0.0,False,,76.095,0.2367,Acetals,COCOC
+97-64-3,ethyl lactate,"날카로움, 단향, 버터",0.0,False,"Buttery, Sharp, Sweet",118.13199999999998,-0.0697,Esters,CCOC(=O)C(C)O
+1918-82-7,2-vinyl thiophene,,0.0,False,,110.18099999999998,2.3911000000000007,Sulfur Compounds,C=CC1=CC=CS1
+687-47-8,ethyl (S)-(-)-lactate,,0.0,False,,118.13199999999998,-0.0697,Esters,CCOC(=O)[C@H](C)O
+105-79-3,isobutyl hexanoate,"단향, 복숭아, 사과, 솔잎, 신맛, 청사과, 파인애플, 흙향",0.0,False,"Apple, Earthy, Green apple, Peach, Pine, Pineapple, Sour, Sweet",172.26799999999997,2.765900000000001,Esters,CCCCCC(=O)OCC(C)C
+5910-89-4,"2,3-dimethyl pyrazine","감자, 견과류, 캐러멜, 커피, 퀴퀴함, 호두",0.0,False,"Caramel, Coffee, Musty, Nutty, Potato, Walnut",108.144,1.09344,pyrazines,CC1=NC=CN=C1C
+103-09-3,2-ethyl hexyl acetate,"허브류, 흙향",0.0,False,"Earthy, Herbal",172.26799999999997,2.765900000000001,Esters,CCCCC(CC)COC(=O)C
+821-55-6,2-nonanone,"단향, 비누, 왁시, 코코넛, 허브류, 흙향",0.0,False,"Coconut, Earthy, Herbal, Soapy, Sweet, Waxy",142.242,2.935900000000001,Carbonyls - Ketones,CCCCCCCC(=O)C
+13925-03-6,2-ethyl-6-methyl pyrazine,감자,0.0,False,Potato,122.17099999999998,1.34742,pyrazines,CCC1=NC(=CN=C1)C
+629-59-4,tetradecane,왁시,0.0,False,Waxy,198.39399999999995,5.707400000000006,Hydrocarbons,CCCCCCCCCCCCCC
+124-19-6,nonanal (aldehyde C-9),"레몬, 시트러스, 오렌지, 오이, 왁시, 장미, 지방취",0.0,False,"Citrus, Cucumber, Fatty, Lemon, Orange, Rose, Waxy",142.242,2.935900000000001,Carbonyls - Aldehydes,CCCCCCCCC=O
+1669-44-9,3-octen-2-one,"단향, 미끌거림, 베리류, 향신료, 허브류, 흙향",0.0,False,"Berry, Earthy, Herbal, Oily, Spicy, Sweet",126.19899999999996,2.3218000000000005,Carbonyls - Ketones,CCCC/C=C/C(=O)C
+15707-23-0,filbert pyrazine,"견과류, 옥수수, 퀴퀴함, 흙향",0.0,False,"Corn, Earthy, Musty, Nutty",122.17099999999998,1.34742,pyrazines,CCC1=NC=CN=C1C
+538-68-1,amyl benzene,,0.0,False,,148.249,3.4193000000000024,Hydrocarbons -benzenes,CCCCCC1=CC=CC=C1
+106-32-1,ethyl octanoate,"단향, 바나나, 배, 사과, 살구, 솔잎, 왁시, 유제품, 퀴퀴함, 크리미, 파인애플",5.0,True,"Apple, Apricot, Banana, Creamy, Dairy, Musty, Pear, Pine, Pineapple, Sweet, Waxy",172.26799999999997,2.910000000000001,Esters,CCCCCCCC(=O)OCC
+64-19-7,acetic acid,"날카로움, 식초, 신맛",10000.0,True,"Sharp, Sour, Vinegar",60.05200000000001,0.0908999999999999,Acids,CC(=O)O
+13925-07-0,"3,5-cocoa pyrazine","견과류, 아몬드, 캐러멜, 커피, 퀴퀴함",0.0,False,"Almond, Caramel, Coffee, Musty, Nutty",136.19799999999998,1.65584,pyrazines,CCC1=NC=C(N=C1C)C
+2198-61-0,isoamyl hexanoate,"단향, 바나나, 사과, 솔잎, 신맛, 파인애플",0.0,False,"Apple, Banana, Pine, Pineapple, Sour, Sweet",186.295,3.156000000000001,Esters,CCCCCC(=O)OCCC(C)C
+138-22-7,butyl lactate,"멜론, 바닐라, 비누, 사과, 왁시, 유제품, 크리미, 흙향",0.0,False,"Apple, Creamy, Dairy, Earthy, Melon, Soapy, Vanilla, Waxy",146.18599999999998,0.7104999999999999,Esters,CCCCOC(=O)C(C)O
+98-01-1,furfural,"나무, 단향, 아몬드, 캐러멜",282.0,True,"Almond, Caramel, Sweet, Woody",96.08499999999998,1.0920999999999998,Furans,C1=COC(=C1)C=O
+2179-57-9,allyl disulfide,금속맛,0.0,False,Metallic,146.28,2.7398000000000016,Sulfur Compounds,C=CCSSCC=C
+1124-11-4,"2,3,5,6-tetramethyl pyrazine","견과류, 드라이함, 바닐라, 초콜릿, 커피, 퀴퀴함",0.0,False,"Chocolate, Coffee, Dry, Musty, Nutty, Vanilla",136.198,1.71028,pyrazines,CC1=C(N=C(C(=N1)C)C)C
+1438-91-1,furfuryl methyl sulfide,,0.0,False,"alliaceous, garlic, horseradish, onion, pungent, radish, sulfurous, vegetable",128.19599999999997,2.1426,Sulfur Compounds,CSCC1=CC=CO1
+1679-51-2,3-cyclohexene-1-methanol,,0.0,False,,112.17199999999998,1.335,Alcohols,C1CC(CC=C1)CO
+1192-62-7,2-acetyl furan,"견과류, 단향, 아몬드, 캐러멜, 커피",10000.0,True,"Almond, Caramel, Coffee, Nutty, Sweet",110.11199999999997,1.4822,Furans,CC(=O)C1=CC=CO1
+271-89-6,1-benzofuran,,0.0,False,,118.13499999999996,2.4328000000000003,Furans,C1=CC=C2C(=C1)C=CO2
+624-13-5,propyl octanoate,"지방취, 코코넛",0.0,False,"Coconut, Fatty",186.295,3.3001000000000023,Esters,CCCCCCCC(=O)OCCC
+100-52-7,benzaldehyde,"견과류, 곡물, 날카로움, 단향, 쓴맛, 아몬드",24.0,True,"Almond, Bitter, Cereal, Nutty, Sharp, Sweet",106.12399999999997,1.4991,Carbonyls - Aldehydes,C1=CC=C(C=C1)C=O
+123-29-5,ethyl nonanoate,"바나나, 사과, 왁시, 장미",0.0,False,"Apple, Banana, Rose, Waxy",186.295,3.3001000000000023,Esters,CCCCCCCCC(=O)OCC
+18829-56-6,(E)-2-nonenal,"시트러스, 오이, 지방취",0.0,False,"Citrus, Cucumber, Fatty",140.22599999999997,2.711900000000001,Carbonyls - Aldehydes,CCCCCC/C=C/C=O
+10348-47-7,ethyl 2-hydroxy-4-methyl valerate,베리류,0.0,False,Berry,160.21299999999997,0.9565,Esters,CCOC(=O)C(CC(C)C)O
+589-75-3,butyl octanoate,"버터, 허브류",0.0,False,"Buttery, Herbal",200.32199999999995,3.6902000000000026,Esters,CCCCCCCC(=O)OCCCC
+79-31-2,isobutyric acid,"버터, 산패취, 신맛, 유제품",0.0,False,"Buttery, Dairy, Rancid, Sour",88.10599999999998,0.727,Acids,CC(C)C(=O)O
+13327-56-5,ethyl methyl mercaptopropionate,"금속맛, 사과, 솔잎, 쌀, 파인애플",7.0,True,"Apple, Metallic, Pine, Pineapple, Rice",148.227,1.3026,Sulfur Compounds,CCOC(=O)CCSC
+19329-89-6,isoamyl lactate,"견과류, 크리미",0.0,False,"Creamy, Nutty",160.213,0.9565,Esters,CC(C)CCOC(=O)C(C)O
+620-02-0,5-methyl furfural,"단향, 캐러멜, 커피, 향신료",0.0,False,"Caramel, Coffee, Spicy, Sweet",110.112,1.40052,Furans,CC1=CC=C(O1)C=O
+611-13-2,methyl 2-furoate,"단향, 담뱃잎",1000.0,True,"Sweet, Tobacco",126.11099999999998,1.0661999999999998,Furans,COC(=O)C1=CC=CO1
+112-12-9,2-undecanone,"꽃, 사과, 솔잎, 왁시, 지방취, 크리미, 파인애플",5.5,True,"Apple, Creamy, Fatty, Floral, Pine, Pineapple, Waxy",170.296,3.716100000000002,Carbonyls - Ketones,CCCCCCCCCC(=O)C
+4265-25-2,2-methyl benzofuran,,0.0,False,"burnt, phenolic",132.16199999999998,2.741220000000001,Furans,CC1=CC2=CC=CC=C2O1
+496-16-2,coumaran,,0.0,False,,120.15099999999995,1.6215,Furans,C1COC2=CC=CC=C21
+107-92-6,butyric acid,"날카로움, 버터, 유제품",0.0,False,"Buttery, Dairy, Sharp",88.10599999999998,0.8711,Acids,CCCC(=O)O
+1192-58-1,1-methyl-2-pyrrole carboxaldehyde,,0.0,False,,109.128,0.8375999999999999,Bases,CN1C=CC=C1C=O
+110-38-3,ethyl decanoate,"곡물, 단향, 미끌거림, 사과, 왁시, 포도",5.0,True,"Apple, Cereal, Grape, Oily, Sweet, Waxy",200.322,3.6902000000000026,Esters,CCCCCCCCCC(=O)OCC
+122-78-1,phenyl acetaldehyde,"꽃, 꿀, 단향, 발효취, 장미, 정향, 초콜릿, 흙향",0.0,False,"Chocolate, Clove, Earthy, Fermented, Floral, Honey, Rose, Sweet",120.15099999999995,1.428,Carbonyls - Aldehydes,C1=CC=C(C=C1)CC=O
+2035-99-6,isoamyl octanoate,"단향, 미끌거림, 비누, 사과, 솔잎, 왁시, 지방취, 코코넛, 파인애플",70.0,True,"Apple, Coconut, Fatty, Oily, Pine, Pineapple, Soapy, Sweet, Waxy",214.349,3.936200000000003,Esters,CCCCCCCC(=O)OCCC(C)C
+98-00-0,furfuryl alcohol,"단향, 캐러멜, 커피, 퀴퀴함, 화학적",0.0,False,"Caramel, Chemical, Coffee, Musty, Sweet",98.10099999999998,0.7719,Furans,C1=COC(=C1)CO
+503-74-2,isovaleric acid,"신맛, 유제품, 지방취",12.0,True,"Dairy, Fatty, Sour",102.13299999999998,1.1171,Acids,CC(C)CC(=O)O
+123-25-1,diethyl succinate,사과,0.07,True,Apple,174.19599999999997,0.8927999999999999,Esters,CCOC(=O)CCC(=O)OCC
+93-89-0,ethyl benzoate,"단향, 드라이함, 민트, 퀴퀴함, 포도",0.0,False,"Dry, Grape, Mint, Musty, Sweet",150.177,1.8633,Esters,CCOC(=O)C1=CC=CC=C1
+3131-63-3,2-ethyl benzofuran,,0.0,False,,146.18899999999996,2.9952000000000014,Furans,CCC1=CC2=CC=CC=C2O1
+98-03-3,thenaldehyde,,0.0,False,sulfurous,112.15299999999998,1.5605999999999998,Sulfur Compounds,C1=CSC(=C1)C=O
+30673-38-2,isobutyl decanoate,"단향, 미끌거림, 발효취, 살구",0.0,False,"Apricot, Fermented, Oily, Sweet",228.376,4.326300000000003,Esters,CCCCCCCCCC(=O)OCC(C)C
+20129-39-9,alpha-corocalene,,0.0,False,,200.325,4.467920000000004,"terpenes, terpenoids",CC1=CC2=C(C=CC(=C2CC1)C)C(C)C
+101-97-3,ethyl phenyl acetate,"꽃, 꿀, 단향, 쌀, 장미, 초콜릿",0.0,False,"Chocolate, Floral, Honey, Rice, Rose, Sweet",164.204,1.7922,Esters,CCOC(=O)CC1=CC=CC=C1
+103-45-7,phenethyl acetate,"꽃, 꿀, 단향, 장미, 효모(누룩)",19.0,True,"Floral, Honey, Rose, Sweet, Yeast",164.204,1.7922,Esters,CC(=O)OCCC1=CC=CC=C1
+106-33-2,ethyl laurate,"꽃, 단향, 비누, 왁시, 크리미",400.0,True,"Creamy, Floral, Soapy, Sweet, Waxy",228.37599999999995,4.470400000000004,Esters,CCCCCCCCCCCC(=O)OCC
+2306-91-4,isoamyl decanoate,"단향, 바나나, 왁시",0.0,False,"Banana, Sweet, Waxy",242.403,4.716400000000005,Esters,CCCCCCCCCC(=O)OCCC(C)C
+60-12-8,phenethyl alcohol,"꽃, 꿀, 단향, 장미",140.0,True,"Floral, Honey, Rose, Sweet",122.16699999999996,1.2213999999999998,Alcohols,C1=CC=C(C=C1)CCO
+74708-73-9,"1,4-Methanobenzocyclodecene","나무, 향신료, 드라이함",1000.0,False,"Woody, Spicy, Dry",202.33,4.335100000000003,Alkene,C1CC=CCC2C3CCC(C3)C2CC=C1
+108-95-2,phenol,"고무, 플라스틱",0.0,False,"Plastic, Rubbery",94.11299999999996,1.3921999999999997,Phenols,C1=CC=C(C=C1)O
+110-27-0,isopropyl myristate,"미끌거림, 지방취",0.0,False,"Fatty, Oily",270.45699999999994,5.639100000000005,Esters,CCCCCCCCCCCCCC(=O)OC(C)C
+124-06-1,ethyl myristate,"단향, 왁시, 크리미",180.0,True,"Creamy, Sweet, Waxy",256.4299999999999,5.250600000000005,Esters,CCCCCCCCCCCCCC(=O)OCC
+2490-53-1,methyl 2-methyl hexadecanoate,,0.0,False,,284.484,5.886700000000006,Esters,CCCCCCCCCCCCCCC(C)C(=O)OC
+112-05-0,nonanoic acid,"왁시, 유제품",0.0,False,"Dairy, Waxy",158.241,2.821600000000001,Acids,CCCCCCCCC(=O)O
+7786-61-0,2-methoxy-4-vinyl phenol,"나무, 단향, 정향, 향신료, 후추, 훈연향",0.0,False,"Clove, Pepper, Smoky, Spicy, Sweet, Woody",150.17699999999996,2.0438000000000005,Phenols,COC1=C(C=CC(=C1)C=C)O
+628-97-7,ethyl palmitate,"미끌거림, 왁시, 크리미",0.0,False,"Creamy, Oily, Waxy",284.484,6.030800000000006,Esters,CCCCCCCCCCCCCCCC(=O)OCC
+54546-22-4,ethyl 9-hexadecenoate,,0.0,False,,282.468,5.806800000000006,Esters,CCCCCC/C=C/CCCCCCCC(=O)OCC
+15399-05-0,ethyl phenyl lactate,"향신료, 후추",0.0,False,"Pepper, Spicy",194.23,1.1531,Esters,CCOC(=O)C(CC1=CC=CC=C1)O
+126-86-3,"2,4,7,9-tetramethyl-5-decyne-4,7-diol (mixture of (±) and meso)",,0.0,False,,226.36,2.5840000000000014,Alcohols,CC(C)CC(C)(C#CC(C)(CC(C)C)O)O
+124-07-2,octanoic acid,"미끌거림, 산패취, 왁시, 지방취",0.0,False,"Fatty, Oily, Rancid, Waxy",144.214,2.4315,Acids,CCCCCCCC(=O)O
+483-76-1,delta-cadinene,"나무, 드라이함, 타임, 허브류",1000.0,True,"Dry, Herbal, Thyme, Woody",204.357,4.7252000000000045,"terpenes, terpenoids",CC1=C[C@H]2[C@@H](CCC(=C2CC1)C)C(C)C
+98-55-5,alpha-terpineol,"꽃, 나무, 드라이함, 라임, 레몬, 솔잎, 시트러스, 청량감",4.6,True,"Citrus, Cooling, Dry, Floral, Lemon, Lime, Pine, Woody",154.253,2.5037000000000007,"terpenes, terpenoids",CC1=CCC(CC1)C(C)(C)O
+67233-91-4,ethyl 9-decenoate,지방취,0.0,False,Fatty,198.30599999999995,3.4662000000000024,Esters,CCOC(=O)CCCCCCCC=C
+78-70-6,linalool,"꽃, 나무, 단향, 베리류, 시트러스, 오렌지, 왁시, 장미",0.01,True,"Berry, Citrus, Floral, Orange, Rose, Sweet, Waxy, Woody",154.253,2.6698000000000013,"terpenes, terpenoids",CC(=CCCC(C)(C=C)O)C
+515-13-9,(-)-beta-elemene,단향,0.0,False,Sweet,204.357,4.747200000000005,"terpenes, terpenoids",CC(=C)[C@@H]1CC[C@@]([C@@H](C1)C(=C)C)(C)C=C
+562-74-3,4-carvomenthenol,"나무, 단향, 시트러스, 퀴퀴함, 향신료, 후추, 흙향",0.0,False,"Citrus, Earthy, Musty, Pepper, Spicy, Sweet, Woody",154.253,2.5037000000000016,"terpenes, terpenoids",CC1=CCC(CC1)(C(C)C)O
+87-44-5,beta-caryophyllene,"나무, 단향, 드라이함, 정향, 향신료",0.0,False,"Clove, Dry, Spicy, Sweet, Woody",204.357,4.7252000000000045,"terpenes, terpenoids",C/C/1=C\CCC(=C)[C@H]2CC([C@@H]2CC1)(C)C
+3856-25-5,alpha-copaene,"꿀, 나무, 향신료",0.0,False,"Honey, Spicy, Woody",204.357,4.270900000000004,"terpenes, terpenoids",CC1=CC[C@H]2[C@H]3[C@@H]1[C@@]2(CC[C@H]3C(C)C)C
+111-27-3,hexanol,"단향, 미끌거림, 허브류",0.0,False,"Herbal, Oily, Sweet",102.177,1.559,Alcohols,CCCCCCO
+18368-95-1,para-menthatriene,"나무, 미끌거림, 솔잎, 청량감, 타임, 허브류, 화학적",0.0,False,"Chemical, Cooling, Herbal, Oily, Pine, Thyme, Woody",134.222,3.229000000000002,"terpenes, terpenoids",CC1=CC=C(CC1)C(=C)C
+99-85-4,gamma-terpinene,"나무, 단향, 라임, 레몬, 미끌거림, 시트러스, 허브류",0.0,False,"Citrus, Herbal, Lemon, Lime, Oily, Sweet, Woody",136.238,3.308900000000002,"terpenes, terpenoids",CC1=CCC(=CC1)C(C)C
+99-87-6,para-cymene,"나무, 레몬, 시트러스, 향신료, 화학적",5.01,True,"Chemical, Citrus, Lemon, Spicy, Woody",134.22199999999998,3.118420000000002,"terpenes, terpenoids",CC1=CC=C(C=C1)C(C)C
+586-62-9,terpinolene,"나무, 단향, 레몬, 솔잎, 시트러스, 허브류",0.0,False,"Citrus, Herbal, Lemon, Pine, Sweet, Woody",136.238,3.453000000000002,"terpenes, terpenoids",CC1=CCC(=C(C)C)CC1
+499-97-8,pseudolimonene,,0.0,False,,136.238,3.308900000000002,"terpenes, terpenoids",CC(=C)C1CCC(=C)CC1
+99-86-5,alpha-terpinene,"나무, 레몬, 시트러스, 타임, 향신료, 허브류",0.0,False,"Citrus, Herbal, Lemon, Spicy, Thyme, Woody",136.238,3.308900000000002,"terpenes, terpenoids",CC1=CC=C(CC1)C(C)C
+79-92-5,camphene,"나무, 허브류",0.0,False,"Herbal, Woody",136.238,2.9987000000000013,"terpenes, terpenoids",CC1(C2CCC(C2)C1=C)C
+97-62-1,ethyl isobutyrate,"단향, 유제품",0.0081,True,"Dairy, Sweet",116.15999999999998,1.2055,Esters,CCOC(=O)C(C)C
+80-56-8,alpha-pinene,"나무, 단향, 솔잎, 오렌지, 청량감, 허브류, 흙향",2.5,True,"Cooling, Earthy, Herbal, Orange, Pine, Sweet, Woody",136.238,2.9987000000000013,"terpenes, terpenoids",CC1=CCC2CC1C2(C)C

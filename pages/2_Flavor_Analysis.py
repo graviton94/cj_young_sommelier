@@ -204,7 +204,7 @@ with tab1:
             required_cols = {'RT', 'Compound', 'Formula', 'CAS', 'Peak area'}
             if required_cols.issubset(df_preview.columns):
                 st.success("✅ 파일 형식이 올바릅니다. (하기 샘플 테이블 확인)")
-                st.dataframe(df_preview.head(), use_container_width=True, hide_index=True)
+                st.dataframe(df_preview.head(), width='stretch', hide_index=True)
                 gcms_valid = True
                 gcms_file.seek(0) # Reset pointer for saving
             else:
@@ -373,13 +373,20 @@ with tab2:
                             elif 'finish' in idx.code.lower() or '여운' in idx.name: emoji = "🕰️"
                             elif 'overall' in idx.code.lower() or '종합' in idx.name: emoji = "⭐"
                             
-                            default_val = 0.0
-                            if selected_lot_data:
-                                # Check standard columns (aroma_score etc)
-                                    if hasattr(selected_lot_data, idx.code) and getattr(selected_lot_data, idx.code):
-                                        default_val = getattr(selected_lot_data, idx.code)
+                            # Pre-fill logic: check dynamic msmts, then standard columns
+                            default_val = None
+                            if idx.code in existing_msmts:
+                                default_val = existing_msmts[idx.code]
+                            elif hasattr(selected_lot_data, idx.code):
+                                default_val = getattr(selected_lot_data, idx.code)
                             
-                            val = st.number_input(f"{emoji} {idx.name}", value=float(default_val), step=1.0, key=f"l_sensory_{idx.code}")
+                            # Use number_input with pre-filled value
+                            val = st.number_input(
+                                f"{emoji} {idx.name}", 
+                                value=float(default_val) if default_val is not None else 0.0, 
+                                step=1.0, 
+                                key=f"l_sensory_{idx.code}"
+                            )
                             sensory_inputs_l[idx.code] = val
     else:
         st.caption("관능 비교 분석을 수행하지 않습니다. (Skip)")
@@ -421,7 +428,7 @@ with tab2:
             required_cols = {'RT', 'Compound', 'Formula', 'CAS', 'Peak area'}
             if required_cols.issubset(df_preview_l.columns):
                 st.success("✅ 파일 형식이 올바릅니다.")
-                st.dataframe(df_preview_l.head(), use_container_width=True, hide_index=True)
+                st.dataframe(df_preview_l.head(), width='stretch', hide_index=True)
                 gcms_valid_l = True
                 gcms_file_l.seek(0)
             else:

@@ -134,7 +134,18 @@ with tab_view:
     if unified_records:
         df = pd.DataFrame(unified_records)
         df['분석일_dt'] = pd.to_datetime(df['분석일'], errors='coerce')
-        df = df.sort_values(by='분석일_dt', ascending=False)
+        
+        # LOT Filtering
+        all_lots = sorted(df['LOT'].unique().tolist())
+        selected_lots = st.multiselect("🔢 LOT 필터", options=all_lots, help="특정 LOT의 분석 이력을 선택하여 조회합니다.")
+        
+        if selected_lots:
+            df = df[df['LOT'].isin(selected_lots)]
+            # If filtered by LOT, sort ascending to show progression
+            df = df.sort_values(by='분석일_dt', ascending=True)
+        else:
+            # Default: descending (most recent first)
+            df = df.sort_values(by='분석일_dt', ascending=False)
         
         # Column Ordering
         fixed_cols = ['분석일', '구분', 'LOT', '샘플명']
@@ -152,7 +163,7 @@ with tab_view:
         final_cols = fixed_cols + sorted_dynamic + remaining + meta_cols
         final_cols = list(dict.fromkeys(final_cols))
         
-        st.dataframe(df[final_cols], use_container_width=True, hide_index=True)
+        st.dataframe(df[final_cols], width='stretch', hide_index=True)
         
         st.divider()
         st.subheader("💾 GCMS 데이터 다운로드")
@@ -270,7 +281,7 @@ with tab_manage:
                 c_btn1, c_btn2, _ = st.columns([1, 1, 3])
                 
                 with c_btn1:
-                    if st.button("💾 변경사항 저장", type="primary", use_container_width=True):
+                    if st.button("💾 변경사항 저장", type="primary", width='stretch'):
                         try:
                             obj = rec['raw_obj']
                             # Convert date
@@ -343,12 +354,12 @@ with tab_manage:
                             st.error(f"저장 실패: {e}")
                             
                 with c_btn2:
-                    if st.button("🗑️ 기록 삭제", type="secondary", use_container_width=True):
+                    if st.button("🗑️ 기록 삭제", type="secondary", width='stretch'):
                         st.session_state[f"confirm_delete_{selected_id}"] = True
                 
                 if st.session_state.get(f"confirm_delete_{selected_id}"):
                     st.error("정말로 이 분석 기록을 삭제하시겠습니까? (복구 불가)")
-                    if st.button("❗️ 예, 확실히 삭제합니다", key=f"final_del_{selected_id}", use_container_width=True):
+                    if st.button("❗️ 예, 확실히 삭제합니다", key=f"final_del_{selected_id}", width='stretch'):
                         try:
                             obj = rec['raw_obj']
                             if rec['is_detailed']:

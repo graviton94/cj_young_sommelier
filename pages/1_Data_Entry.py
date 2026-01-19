@@ -56,7 +56,6 @@ with tab1:
             admission_date = st.date_input("📅 입고일 (Admission)", value=default_date, disabled=True)
 
     # 2. LOT Number
-    # 2. LOT Number
     with c2:
         lot_number_input = st.text_input("🔢 LOT 번호", help="새로운 LOT 번호")
     
@@ -90,29 +89,26 @@ with tab1:
             batch = indices_basic[i:i+4]
             for j, idx in enumerate(batch):
                 with cols_b[j]:
-                    # Special default for New LOT vs Existing
-                    default_val = 0.0
-                    
                     # Check for Alcohol (Methanol optional?)
                     label = f"🧪 {idx.name} ({idx.unit})"
                     if 'alcohol' in idx.code.lower() or '알코올' in idx.name:
                         label += " *"
-                    
-                    fmt = "%.4f" # Default format
-                    if '밀도' in idx.name or 'density' in idx.code.lower() or '비중' in idx.name:
-                        fmt = "%.5f"
-                    elif 'pH' in idx.name or 'ph' in idx.code.lower():
-                        fmt = "%.2f"
-                    
-                    val = st.number_input(
+                        
+                    # Use text_input to allow "None" (empty string) as default
+                    val_str = st.text_input(
                         label,
-                        min_value=float(idx.min_value) if idx.min_value is not None else 0.0,
-                        max_value=float(idx.max_value) if idx.max_value is not None else None,
-                        step=float(idx.step) if idx.step else 0.00001 if '밀도' in idx.name else 0.1,
-                        format=fmt,
-                        key=f"input_{idx.code}"
+                        key=f"input_{idx.code}",
+                        placeholder="공란 가능"
                     )
-                    chemical_inputs[idx.code] = val
+                    
+                    if val_str.strip():
+                        try:
+                            chemical_inputs[idx.code] = float(val_str)
+                        except ValueError:
+                            st.error(f"'{idx.name}'에는 숫자만 입력해주세요.")
+                            chemical_inputs[idx.code] = None
+                    else:
+                        chemical_inputs[idx.code] = None
     
     # Sensory Scores are shown by default for New LOT
     do_sensory = True
@@ -225,6 +221,11 @@ with tab1:
                                 if idx.code in ['aroma_score', 'taste_score', 'finish_score', 'overall_score']:
                                     sensory_inputs[idx.code] = val
                                 else:
+                                    # Handle additional sensory indices as chemical-style (but they use number_input)
+                                    # If user wants ALL to be none by default, maybe these should be text_input too?
+                                    # But sensory comparison is usually numeric. 
+                                    # Let's keep sensory numeric for now but ensure it's not overriding if 0?
+                                    # Actually the user specifically said "Chemical components".
                                     chemical_inputs[idx.code] = val
     
     st.markdown("---")
@@ -397,9 +398,20 @@ with tab2:
                     indices = get_all_indices(session, basic_only=True)
                     for i, idx in enumerate(indices):
                         with cols[i % 3]:
-                            c_val = val_map.get(idx.code, 0.0)
-                            n_val = st.number_input(f"{idx.name}", value=float(c_val), step=idx.step, key=f"edit_{idx.code}")
-                            param_inputs[idx.code] = n_val
+                            c_val = val_map.get(idx.code)
+                            # Use text_input to show None as empty
+                            val_str = st.text_input(
+                                f"{idx.name}", 
+                                value=str(c_val) if c_val is not None else "", 
+                                key=f"edit_{idx.code}"
+                            )
+                            if val_str.strip():
+                                try:
+                                    param_inputs[idx.code] = float(val_str)
+                                except ValueError:
+                                    param_inputs[idx.code] = None
+                            else:
+                                param_inputs[idx.code] = None
                             
                     submitted_edit = st.form_submit_button("💾 수정사항 저장")
                     
