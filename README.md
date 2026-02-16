@@ -2,6 +2,14 @@
 
 AI 기반 주류 분석 및 향미 예측 플랫폼. LOT별 화학 성분 변화를 추적하고, 머신러닝을 사용하여 관능 점수를 예측하며, Gemini LLM을 통해 시음 리포트를 생성합니다.
 
+## 📚 AI-Native Documentation
+
+이 프로젝트는 AI 에이전트가 코드베이스를 빠르게 이해할 수 있도록 구조화된 문서를 제공합니다:
+
+- **[llms.txt](llms.txt)**: 프로젝트 개요, 파일 맵, 기술 스택 (AI 컨텍스트 맵)
+- **[ARCHITECTURE.md](ARCHITECTURE.md)**: 데이터 흐름, 디자인 패턴, 시스템 제약사항
+- **[.github/copilot-instructions.md](.github/copilot-instructions.md)**: AI 코딩 어시스턴트 가이드라인 (Karpathy 원칙)
+
 ## 기능
 
 - **📊 LOT 데이터 관리**: 주류 배치의 화학 성분 데이터 추적 및 관리

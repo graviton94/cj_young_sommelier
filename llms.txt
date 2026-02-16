@@ -1,51 +1,57 @@
 # CJ Young Sommelier - AI Context Map
 
 ## Project Summary
-CJ Young Sommelier is an AI-driven liquor analytics platform for tracking LOT-specific chemical composition changes, predicting sensory scores using machine learning, and generating comprehensive flavor reports via Google Gemini LLM. The platform integrates chemical analysis (GCMS), ML-based quality prediction, and AI-powered sensory profiling to provide actionable insights for beverage quality control and product development. Built with Streamlit for interactive web UI, SQLite for data persistence, and scikit-learn for predictive modeling.
+CJ Young Sommelier is an AI-powered liquor quality analytics platform for chemical composition tracking, sensory score prediction, and automated flavor profiling. The system analyzes GCMS (Gas Chromatography-Mass Spectrometry) data to predict sensory characteristics using machine learning and generates comprehensive flavor reports via Google Gemini AI. Target users are liquor manufacturers and quality control teams managing production LOT analysis, prototype evaluation, and time-series quality tracking across manufacturing batches.
 
 ## File Map
 
 ### Core Application
-- main.py: Streamlit application entry point with landing page and navigation setup
-- requirements.txt: Python dependencies including Streamlit, SQLAlchemy, scikit-learn, Plotly, and Google Generative AI
-- Dockerfile: Container deployment configuration for production environment
-- .env.template: Environment variable template for API key configuration
+- main.py: Streamlit application entry point with SQLite Linux compatibility hack and landing page navigation
+- requirements.txt: Python dependencies (Streamlit, scikit-learn, RDKit, Google Generative AI, SQLAlchemy)
+- Dockerfile: Container deployment configuration with volume mounts for data persistence
+- .env.template: Environment variable template for GEMINI_API_KEY configuration
 
-### Source Modules (src/)
-- src/database.py: SQLAlchemy ORM models and database operations for LOT data, sensory profiles, analysis indices, and measurements
-- src/analysis.py: ML predictor (SensoryPredictor) for regression-based sensory score prediction and flavor analysis utilities
-- src/llm.py: Google Gemini integration (GeminiFlavorReporter) for AI-generated flavor reports and chemical insights
-- src/chem_utils.py: PubChemPy and RDKit utilities for compound lookup and chemical property calculation
-- src/maintenance.py: Database maintenance and migration utilities
+### Business Logic (src/)
+- src/database.py: SQLAlchemy ORM models (5 tables) and repository functions with auto-migration support
+- src/analysis.py: ML predictor (SensoryPredictor) with sklearn models and FlavorAnalyzer with PubChem integration
+- src/llm.py: Google Gemini AI integration (GeminiFlavorReporter) for automated report generation
+- src/chem_utils.py: PubChem/RDKit chemical compound lookup and molecular property calculation
+- src/maintenance.py: Database enrichment utilities for batch chemical data updates
 
-### Streamlit Pages (pages/)
-- pages/1_Data_Entry.py: LOT data registration with chemical composition input
-- pages/2_Flavor_Analysis.py: Detailed flavor analysis for prototypes and LOT samples with GCMS data upload
-- pages/3_Analysis_Result.py: Unified analysis result viewer with edit/delete capabilities
-- pages/4_Prediction.py: ML-based sensory score prediction interface
-- pages/5_Sensory.py: Sensory evaluation and multi-LOT comparison with radar charts
-- pages/6_Report.py: AI-powered comprehensive flavor report generation
-- pages/7_Settings.py: System configuration for analysis indices and GCMS compound library
+### User Interface (pages/)
+- pages/1_Data_Entry.py: LOT registration with basic chemical parameters and sensory scores
+- pages/2_Flavor_Analysis.py: GCMS CSV upload and detailed flavor indicator analysis
+- pages/3_Analysis_Result.py: Unified view of all analysis records with edit/delete capabilities
+- pages/4_Prediction.py: ML-based sensory prediction from chemical composition
+- pages/5_Sensory.py: Flavor knowledge base management with compound lookup and radar chart visualization
+- pages/6_Report.py: AI-generated comprehensive flavor reports using Gemini
+- pages/7_Settings.py: Analysis index configuration (dynamic schema management)
 
 ### Data Storage (data/)
-- data/liquor_analytics.db: SQLite database storing all LOT data, measurements, and sensory profiles
-- data/models/: Directory for trained ML model serialization (pickle files)
-- data/master_flavor_db.csv: Master flavor compound database with odor thresholds and descriptors
+- data/liquor_analytics.db: SQLite database (gitignored, auto-created on first run)
+- data/master_flavor_db.csv: Reference database of 300+ chemical compounds with flavor descriptors
+- data/GCMS_example.csv: Sample GCMS data format template
+- data/AAC_example.csv: Sample AAC (Aroma Active Compounds) data format
+- data/OAV_example.csv: Sample OAV (Odor Activity Value) data format
+- data/gcms_uploads/: Directory for uploaded GCMS analysis files
+- data/models/: Directory for trained ML model pickle files (gitignored)
 
-### Knowledge Base (knowledge_base/)
-- knowledge_base/flavor_chemistry.md: Reference documentation for flavor chemistry principles
-- knowledge_base/system_persona.md: AI system persona and analysis guidelines
-- knowledge_base/report_template.md: Template structure for AI-generated reports
+### AI Knowledge Base (knowledge_base/)
+- knowledge_base/system_persona.md: AI sommelier character definition and response constraints
+- knowledge_base/flavor_chemistry.md: Chemical compound to flavor mapping reference
+- knowledge_base/report_template.md: Structured report output template
+
+### Configuration
+- .github/copilot-instructions.md: Karpathy coding guidelines (minimalism, reliability, maintenance)
+- .devcontainer/: Dev container configuration for VS Code
+- .gitignore: Excludes database, models, uploads, and Python cache
 
 ### Documentation
-- README.md: Korean language user guide with installation, usage, and deployment instructions
-- QUICKSTART.md: Quick start guide for new users
-- IMPLEMENTATION_SUMMARY.md: Daily development log and feature implementation summary
-- .github/copilot-instructions.md: AI coding assistant guidelines (Karpathy principles)
+- Documentation/README.md: Main documentation in Korean with setup instructions
+- Documentation/QUICKSTART.md: 5-minute setup guide
+- Documentation/IMPLEMENTATION_SUMMARY.md: Daily development log
 
 ### Build & Utilities
-- .devcontainer/: Development container configuration
-- .gitignore: Git exclusion patterns for build artifacts and environment files
 - migrate_db.py: Database schema migration script
 - test_api.py: API integration testing utilities
 - debug_env.py: Environment debugging script
@@ -54,35 +60,35 @@ CJ Young Sommelier is an AI-driven liquor analytics platform for tracking LOT-sp
 ## Tech Stack
 
 ### Languages
-- Python 3.11+
+- Python 3.9+ (recommended 3.11+)
 
 ### Web Framework
-- Streamlit 1.31.0+ (Interactive web UI)
+- Streamlit 1.31.0+ (multi-page web application framework)
 
 ### Database
-- SQLite (Local persistence)
-- SQLAlchemy 2.0.0+ (ORM layer)
-- pysqlite3-binary 0.5.2+ (Linux compatibility)
+- SQLite (embedded database)
+- SQLAlchemy 2.0+ (ORM with declarative base)
+- pysqlite3-binary (Linux compatibility for Streamlit Cloud)
 
 ### Machine Learning
-- scikit-learn 1.3.0+ (Random Forest, Gradient Boosting, Linear/Ridge/Lasso regression)
-- pandas 2.0.0+ (Data manipulation)
-- numpy 1.24.0+ (Numerical computing)
+- scikit-learn 1.3+ (Random Forest, Gradient Boosting, Linear, Ridge, Lasso regression)
+- pandas 2.0+ (data manipulation and CSV processing)
+- numpy 1.24+ (numerical operations)
 
 ### Data Visualization
-- Plotly 5.18.0+ (Interactive charts and radar plots)
+- Plotly 5.18.0+ (interactive data visualizations and radar charts)
 
 ### AI/LLM
-- google-generativeai 0.3.0+ (Gemini API for flavor reports and chemical insights)
+- google-generativeai 0.3+ (Gemini Pro integration for natural language report generation)
 
 ### Chemical Informatics
-- pubchempy 1.0.4+ (Compound database lookup)
-- rdkit 2023.9.1+ (Molecular property calculation and structure rendering)
+- PubChemPy 1.0.4+ (compound lookup via PubChem REST API)
+- RDKit 2023.9.1+ (molecular property calculation, SMILES parsing, functional group detection)
 
-### Data Processing
-- pyarrow 14.0.0+ (Parquet support for data export)
-- python-dotenv 1.0.0+ (Environment variable management)
+### Utilities
+- python-dotenv 1.0+ (environment variable management for API keys)
+- pyarrow 14.0+ (Parquet file support for data interchange)
 
 ### Deployment
-- Docker (Container deployment)
-- Streamlit Community Cloud (Cloud hosting option)
+- Docker (containerized deployment with persistent volumes)
+- Streamlit Community Cloud (cloud deployment platform)
