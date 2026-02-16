@@ -203,9 +203,10 @@ Store new sensory profiles via src/database.py: add_sensory_profile()
    - RDKit properties (logP, molecular_weight, SMILES) calculated once and stored
    - No recalculation unless user explicitly requests refresh
 
-5. **Gemini Model Version Pinning**
-   - Always use 'models/gemini-pro-latest' endpoint
-   - No hardcoded version numbers (follow Google's latest stable)
+5. **Gemini Model Version**
+   - Currently uses 'models/gemini-pro-latest' endpoint (follows Google's latest stable)
+   - Note: This introduces non-deterministic behavior as the model may change without notice
+   - Trade-off: Always uses newest features vs. reproducible outputs
 
 ### Performance Constraints
 
